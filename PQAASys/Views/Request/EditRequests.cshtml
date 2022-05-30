@@ -1,0 +1,52 @@
+﻿@model IEnumerable<Request>
+@{
+    ViewBag.Title = "Список заявок, поданных в лабораторию";
+}
+<form asp-controller="Request" asp-action="EditRequests">
+    <p>
+        Номер заявки: <input type="text" name="SearchString" />
+        <input type="submit" value="Найти" />        
+    </p>
+</form>
+<div>
+    <p>На сегодняшний день в лабораторию подано @Model.Count() заявок.</p>
+    <table class="table-request">
+        <thead>
+            <tr>
+                <th>Номер заявки</th>
+                <th>Внутренний заказчик</th>
+                <th>Вид испытания</th>
+                <th>Стандарт</th>            
+                <th>Маркировка образцов</th>
+                <th>Дата подачи заявки</th>
+                <th>Статус</th>
+                <th>Комментарий</th>
+                <th> </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.requestNumber</td>
+                    <td>
+                        @item.InnerCustomerNavigation.SurName
+                        @item.InnerCustomerNavigation.FirstName
+                        @item.InnerCustomerNavigation.Patronymic
+                    </td>
+                    <td>@item.TypeOfTestNavigation.TestName</td>
+                    <td>
+                        @item.StandartNavigation.StandartSeries
+                        @item.StandartNavigation.StandartNumber
+                        @*@item.StandartNavigation.StandartName*@
+                    </td>
+                    <td>@item.InfoAboutSamplesNavigation.Marking</td>
+                    <td>@item.RequestDate.ToShortDateString()</td>
+                    <td>@item.StatusNavigation.Status1</td>
+                    <td>@item.Comment</td>
+                    <td><a asp-area=" " asp-controller="Request" asp-action="Edit" asp-route-id="@item.requestNumber">Редактировать</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

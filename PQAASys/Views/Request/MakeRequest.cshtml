@@ -1,0 +1,63 @@
+﻿@model RequestViewModel
+
+@{
+    ViewData["Title"] = "Подать заявку";
+}
+<h2>Шаг 2. Введите оставшиеся данные для завершения процесса оформления заявки</h2>
+<hr />
+<div class="row">
+    <div class="div-register">
+        <form asp-action="MakeRequest">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+  
+            <div class="form-group">
+                <label asp-for="request.innerCustomer" class="control-label">Внутренний заказчик</label>
+                <select asp-for="request.innerCustomer" class="form-control" asp-items="@Model.UserList">
+                    <option>--Найти себя--</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="request.outerCustomer" class="control-label">Внешний заказчик</label>
+                <select asp-for="request.outerCustomer" class="form-control" asp-items="@Model.OrganizationList">
+                    <option>--Выбрать организацию--</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="request.typeOfTest" class="control-label">Вид испытания</label>
+                <select asp-for="request.typeOfTest" class="form-control" asp-items="@Model.TestList">
+                    <option>--Выбрать вид испытаний--</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="request.Standart" class="control-label">Стандарт на испытание</label>
+                <select asp-for="request.Standart" class="form-control" asp-items="@Model.StandartList">
+                    <option>--Выбрать стандарт--</option>
+                </select>
+            </div>
+            <div hidden>
+                <input asp-for="request.InfoAboutSamples" id="Text1" type="text" value="@ViewData["SetId"]" />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="request.InfoAboutConditions" class="control-label">Условия испытаний</label>
+                <select asp-for="request.InfoAboutConditions" class="form-control" asp-items="@Model.ConditionList">
+                    <option>--Выбрать условия--</option>
+                </select>
+            </div>
+            <br/>
+            <div class="form-group">
+                @*<label asp-for="request.Comment" class="control-label">Комментарий</label>*@
+                <textarea placeholder="Комментарий" asp-for="request.Comment" class="form-control"></textarea>
+                <span asp-validation-for="request.Comment" class="text-danger"></span>
+            </div><br />
+            <div class="form-group">
+                <input type="submit" value="Подать заявку" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

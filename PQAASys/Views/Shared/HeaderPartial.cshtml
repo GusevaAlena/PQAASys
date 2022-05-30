@@ -1,0 +1,35 @@
+﻿<section id="header">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+
+                <!-- Logo -->
+                <h1><a href="index.html" id="logo">PromTest</a></h1>
+
+                <!-- Nav -->
+                <nav id="nav">
+                    @if (!User.IsInRole("Admin"))
+                    {
+                        <a asp-area="" asp-controller="Home" asp-action="Index">Главная</a>
+                        <a asp-area="" asp-controller="SampleSet" asp-action="Index">Подать заявку</a>
+                        <a asp-area="" asp-controller="Request" asp-action="ShowRequests">Статус заявки</a>
+                        <a asp-area="" asp-controller="Account" asp-action="Register">Регистрация</a>}
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <a asp-area="" asp-controller="Standart" asp-action="Index">Стандарты</a>
+                        <a asp-area="" asp-controller="Request" asp-action="EditRequests">Заявки</a>
+                     }
+                    @if (!User.Identity.IsAuthenticated)
+                    {
+                        <a asp-area="" asp-controller="Account" asp-action="Login">Войти</a>
+                    }
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <a asp-area="" asp-controller="Account" asp-action="Logout">Выйти</a>
+                    }
+                </nav>
+
+            </div>
+        </div>
+    </div>
+</section>

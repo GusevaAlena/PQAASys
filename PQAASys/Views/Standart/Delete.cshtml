@@ -1,0 +1,17 @@
+﻿@model PQAASys.Standart
+
+@{
+    ViewData["Title"] = "Удаление стандарта";
+}
+
+<h2>Вы действительно хотите удалить этот стандарт из перечня?</h2>
+<div>
+    <h2>@Model.StandartSeries @Model.StandartNumber - @Model.StandartName - @Model.YearOfIssue</h2>    
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Standart_id" />
+        <input type="submit" value="Удалить" class="btn btn-danger" />
+        <br/>
+        <a asp-action="Index">Вернуться к перечню стандартов</a>
+    </form>
+</div>

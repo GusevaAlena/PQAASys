@@ -1,0 +1,39 @@
+﻿@model RequestViewModel
+
+@{
+    ViewData["Title"] = "Редактировать заявку";
+}
+<h2>Редактирование заявки</h2>
+<hr />
+<div class="row">
+    <div class="div-register">
+        <form asp-action="Edit" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div hidden>
+                <input  type="text" asp-for="request.requestNumber" value="@Model.request.requestNumber" />
+                <input  type="text" asp-for="request.innerCustomer" value="@Model.request.innerCustomer" />
+                <input  type="text" asp-for="request.outerCustomer" value="@Model.request.outerCustomer" />
+                <input  type="text" asp-for="request.typeOfTest" value="@Model.request.typeOfTest" />
+                <input  type="text" asp-for="request.InfoAboutSamples" value="@Model.request.InfoAboutSamples" />
+                <input  type="text" asp-for="request.InfoAboutConditions" value="@Model.request.InfoAboutConditions" />
+                <input  type="text" asp-for="request.RequestDate" value="@Model.request.RequestDate" />
+                <input  type="text" asp-for="request.Standart" value="@Model.request.Standart" />
+            </div>
+            <div class="form-group">
+                <label asp-for="request.Status" class="control-label">Статус заявки</label>
+                <select asp-for="request.Status" class="form-control" asp-items="@Model.StatusList">
+                    <option>--Статус--</option>
+                </select>
+            </div>
+            <br/>
+            <div class="form-group">
+                @*<label asp-for="request.Comment" class="control-label">Комментарий</label>*@
+                <textarea placeholder="Комментарий" asp-for="request.Comment" class="form-control" ></textarea>
+                <span asp-validation-for="request.Comment" class="text-danger"></span>
+            </div><br />
+            <div class="form-group">
+                <input type="submit" value="Обновить" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>

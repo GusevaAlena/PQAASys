@@ -1,0 +1,31 @@
+﻿@model IEnumerable<Request>
+@{
+    ViewBag.Title = "Информация о статусе заявки";
+}
+<form asp-controller="Request" asp-action="ShowRequests">
+    <p>
+        Номер заявки: <input type="text" name="SearchString" />
+        <input type="submit" value="Найти" />
+    </p>
+</form>
+<table class="table-request" width="600px">
+    <thead>
+        <tr>
+            <th>Номер заявки</th>
+            <th>Дата подачи заявки</th>
+            <th>Статус</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.requestNumber</td>
+                <td>@item.RequestDate.ToShortDateString()</td>
+                <td>@item.StatusNavigation.Status1</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+

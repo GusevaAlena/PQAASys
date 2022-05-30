@@ -1,0 +1,43 @@
+﻿@model IEnumerable<Standart>
+@{
+    ViewBag.Title = "Список используемых стандартов";
+}
+<h2>Редактирование перечня стандартов</h2>
+<br/>
+<form asp-controller="Standart" asp-action="Index">
+    <p>
+        @*Серия стандарта: <input type="text" name="SearchString1" />
+        <input type="submit" value="Найти" />*@
+        Номер стандарта: <input type="text" name="SearchString2" />
+        <input type="submit" value="Найти" />
+    </p>
+</form>
+<h3><a asp-action="Create">Добавить стандарт</a></h3>
+<div>
+    <table class="table-request">
+        <thead>
+            <tr>
+                <th>Серия стандарта</th>
+                <th>Номер стандарта</th>
+                <th>Название</th>
+                <th>Год выпуска</th> 
+                <th> </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.StandartSeries</td>
+                    <td>@item.StandartNumber</td>
+                    <td>@item.StandartName</td>
+                    <td>@item.YearOfIssue</td>                    
+                    <td>
+                        <a asp-area=" " asp-controller="Standart" asp-action="Edit" asp-route-id="@item.Standart_id">Редактировать</a>
+                        <a asp-area=" " asp-controller="Standart" asp-action="Delete" asp-route-id="@item.Standart_id">Удалить</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
